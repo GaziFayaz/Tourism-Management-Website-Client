@@ -5,7 +5,7 @@ const Footer = () => {
 			<footer className="footer w-full">
 				<form className="w-full" >
 					<p className="text-xl font-bold">
-						Global Guide Inc.
+						GlobeGuide Inc.
 					</p>
 					<h6 className="footer-title">About Us</h6>
 					<p className="lg:w-80 text-justify">
