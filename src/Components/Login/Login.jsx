@@ -99,7 +99,7 @@ const Login = () => {
 				<Helmet>
 					<title>GlobeGuide | Login</title>
 				</Helmet>
-				<span className="loading loading-spinner loading-lg text-[#5356FF] "></span>
+				<span className="loading loading-spinner loading-lg text-accent-pink "></span>
 			</div>
 		);
 	}

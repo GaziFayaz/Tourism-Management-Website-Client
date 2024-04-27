@@ -17,7 +17,7 @@ const Countries = () => {
 
 	return (
 		<div className="flex flex-col items-center text-center w-full">
-			<h1 className="text-7xl font-bold text-[#5356FF]">Countries</h1>
+			<h1 className="text-7xl font-bold text-accent-cyan">Countries</h1>
 			<p className="w-3/4 text-xl mt-5 font-medium">
 				<span className="font-bold">Explore</span> and{" "}
 				<span className="font-bold">Find</span> the Best Country for{" "}
