@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { FaLocationDot } from "react-icons/fa6";
-import { MdSpaceDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";

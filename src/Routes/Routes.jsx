@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../Layout/Root";
 import Home from "../Components/Home/Home";
+import AddTouristSpot from "../Components/AddTouristSpot/AddTouristSpot";
+import AllTouristSpots from "../Components/AllTouristSpots/AllTouristSpots";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +11,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
+      },
+      {
+        path: "/all-tourist-spots",
+        element: <AllTouristSpots></AllTouristSpots>
+      },
+      {
+        path: "/add-tourist-spot",
+        element: <AddTouristSpot></AddTouristSpot>
       }
     ]
   }
