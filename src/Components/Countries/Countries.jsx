@@ -10,29 +10,12 @@ const Countries = () => {
 		AOS.init();
 		AOS.refresh();
 	}, []);
-	const [countries, setCountries] = useState([
-		{
-			_id: { $oid: "662bef401261c1153f6381a3" },
-			img_url: "https://i.ibb.co/ZfrmyjD/france.jpg",
-			country_name: "France",
-			description:
-				"The epitome of romance and culture, offers iconic landmarks like the Eiffel Tower, exquisite cuisine, and picturesque countryside.",
-		},
-		{
-			_id: { $oid: "662bef401261c1153f6381a3" },
-			img_url: "https://i.ibb.co/ZfrmyjD/france.jpg",
-			country_name: "France",
-			description:
-				"France, the epitome of romance and culture, offers iconic landmarks like the Eiffel Tower, exquisite cuisine, and picturesque countryside.",
-		},
-		{
-			_id: { $oid: "662bef401261c1153f6381a3" },
-			img_url: "https://i.ibb.co/ZfrmyjD/france.jpg",
-			country_name: "France",
-			description:
-				"France, the epitome of romance and culture, offers iconic landmarks like the Eiffel Tower, exquisite cuisine, and picturesque countryside.",
-		},
-	]);
+	const [countries, setCountries] = useState([]);
+	useEffect(() => {
+		fetch("http://localhost:5000/countries")
+			.then((res) => res.json())
+			.then((data) => setCountries(data));
+	}, []);
 
 	return (
 		<div className="flex flex-col items-center text-center w-full">
@@ -46,26 +29,29 @@ const Countries = () => {
 				{countries.map((country) => {
 					console.log(country);
 					return (
-						<div
-							data-aos="zoom-in"
-							className="card card-compact bg-base-100 shadow-xl w-full"
-							key={country._id}
-						>
-							<figure>
-								<img
-									src={country.img_url}
-									alt="Shoes"
-									className="h-[250px] w-full object-cover"
-								/>
-							</figure>
-							<div className="card-body">
+						<Link to={`/country/${country.country_name}`} key={country._id}>
+							<div
+								data-aos="zoom-in"
+								className="card card-compact bg-base-100 shadow-xl w-full h-full"
+								
+							>
+								<figure>
+									<img
+										src={country.img_url}
+										alt="Shoes"
+										className="h-[250px] w-full object-cover"
+									/>
+								</figure>
+								<div className="card-body">
 									<h2 className="card-title text-left text-3xl">
 										{country.country_name}
 									</h2>
-                  <p className="card text-justify text-xl">{country.description}</p>
-								
+									<p className="card text-justify text-xl">
+										{country.description}
+									</p>
+								</div>
 							</div>
-						</div>
+						</Link>
 					);
 				})}
 			</div>
