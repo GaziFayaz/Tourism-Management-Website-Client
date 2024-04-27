@@ -168,11 +168,12 @@ const AddTouristSpot = () => {
 						<p className="text-xl font-semibold text-white mb-2">User Email</p>
 						<input
 							{...register("user_email", { required: true })}
+              value={user.email}
 							type="email"
 							name="user_email"
 							id="user_email"
 							placeholder="User Email"
-							required
+							disabled
 							className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
 						/>
 					</div>
@@ -180,11 +181,12 @@ const AddTouristSpot = () => {
 						<p className="text-xl font-semibold text-white mb-2">User Name</p>
 						<input
 							{...register("user_name", { required: true })}
+              value={user.displayName}
 							type="text"
 							name="user_name"
 							id="user_name"
 							placeholder="User Name"
-							required
+							disabled
 							className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
 						/>
 					</div>
