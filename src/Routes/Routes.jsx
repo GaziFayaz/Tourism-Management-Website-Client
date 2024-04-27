@@ -5,32 +5,37 @@ import AddTouristSpot from "../Components/AddTouristSpot/AddTouristSpot";
 import AllTouristSpots from "../Components/AllTouristSpots/AllTouristSpots";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root></Root>,
-    children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "/all-tourist-spots",
-        element: <AllTouristSpots></AllTouristSpots>
-      },
-      {
-        path: "/add-tourist-spot",
-        element: <AddTouristSpot></AddTouristSpot>
-      },
-      {
-        path: "/login",
-        element: <Login></Login>
-      },
-      {
-        path: "/register",
-        element: <Register></Register>
-      }
-    ]
-  }
-])
+	{
+		path: "/",
+		element: <Root></Root>,
+		children: [
+			{
+				path: "/",
+				element: <Home></Home>,
+			},
+			{
+				path: "/all-tourist-spots",
+				element: <AllTouristSpots></AllTouristSpots>,
+			},
+			{
+				path: "/add-tourist-spot",
+				element: (
+					<PrivateRoutes>
+						<AddTouristSpot></AddTouristSpot>
+					</PrivateRoutes>
+				),
+			},
+			{
+				path: "/login",
+				element: <Login></Login>,
+			},
+			{
+				path: "/register",
+				element: <Register></Register>,
+			},
+		],
+	},
+]);

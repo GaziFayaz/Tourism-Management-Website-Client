@@ -2,8 +2,19 @@ import { useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { AuthContext } from "../../Providers/AuthProvider";
+
 
 const AddTouristSpot = () => {
+  useEffect(() => {
+		AOS.init();
+		AOS.refresh();
+	}, []);
+
+	const { user } =
+		useContext(AuthContext);
 
 	const { register, handleSubmit, watch  } = useForm();
 
@@ -52,7 +63,7 @@ const AddTouristSpot = () => {
 						className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
 					/>
 				</div>
-				<div className="flex gap-2">
+				<div className="flex gap-2 w-full">
 					<div className="w-full">
 						<p className="text-xl font-semibold text-white mb-2">
 							Country Name
@@ -96,7 +107,7 @@ const AddTouristSpot = () => {
 					/>
 				</div>
 
-				<div className="flex gap-2">
+				<div className="flex gap-2 w-full">
 					<div className="w-full">
 						<p className="text-xl font-semibold text-white mb-2">
 							Average Cost ($)
@@ -152,7 +163,7 @@ const AddTouristSpot = () => {
 						className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
 					/>
 				</div>
-				<div className="flex gap-2">
+				<div className="flex gap-2 w-full">
 					<div className="w-full">
 						<p className="text-xl font-semibold text-white mb-2">User Email</p>
 						<input
