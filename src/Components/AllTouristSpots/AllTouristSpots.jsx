@@ -43,7 +43,7 @@ const AllTouristSpots = () => {
 									</p>
 								</div>
 								<div className="card-actions justify-end">
-									<Link to={`tourist-spot/${touristSpot._id}`}>
+									<Link to={`../tourist-spot/${touristSpot._id}`}>
 										<button className="btn bg-[#5356FF] text-white">
 											See Details
 										</button>
