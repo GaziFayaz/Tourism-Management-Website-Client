@@ -26,6 +26,9 @@ const AddTouristSpot = () => {
 	});
 
 	const onSubmit = (data) => {
+		data.avg_cost = parseInt(data.avg_cost);
+		data.travel_time = parseInt(data.travel_time);
+		data.visitors = parseInt(data.visitors);
 		let flag = 0;
 		console.log(data);
 		fetch("http://localhost:5000/countries")
