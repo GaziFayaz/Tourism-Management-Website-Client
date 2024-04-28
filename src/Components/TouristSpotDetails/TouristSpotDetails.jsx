@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useLoaderData} from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { MdOutlineModeOfTravel } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi";
@@ -69,22 +69,6 @@ const TouristSpotDetails = () => {
 								</span>
 							</div>
 						</div>
-					</div>
-					<div className="flex justify-center">
-						{/* <button
-							onClick={() =>
-								shortListEstate(
-									shortlistKey,
-									user,
-									estate.id,
-									successToast,
-									errorToast
-								)
-							}
-							className="btn btn-primary"
-						>
-							Add to shortlist
-						</button> */}
 					</div>
 				</div>
 			</div>
