@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddTouristSpot = () => {
 	useEffect(() => {
@@ -13,16 +14,64 @@ const AddTouristSpot = () => {
 	}, []);
 
 	const { user } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
-	} = useForm({defaultValues: { user_name: user.displayName, user_email: user.email }});
+	} = useForm({
+		defaultValues: { user_name: user.displayName, user_email: user.email },
+	});
 
 	const onSubmit = (data) => {
+		let flag = 0;
 		console.log(data);
+		fetch("http://localhost:5000/countries")
+			.then((res) => res.json())
+			.then((countries) => {
+				console.log(countries);
+				countries.forEach((country) => {
+					console.log(country.country_name, data.country_name);
+					if (country.country_name === data.country_name) {
+						flag = 1;
+						fetch("http://localhost:5000/tourist-spot", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(data),
+						})
+							.then((res) => res.json())
+							.then((data) => {
+								console.log(data);
+								if (data.insertedId) {
+									fetch(`http://localhost:5000/update-user/${user.uid}`, {
+										method: "POST",
+										headers: {
+											"Content-Type": "application/json",
+										},
+										body: JSON.stringify({ insertedId: data.insertedId }),
+									})
+										.then((res) => res.json())
+										.then((data) => {
+											console.log(data);
+											if (data.modifiedCount) {
+												toast.success("Tourist Spot Added Successfully");
+											}
+										});
+								}
+							});
+						navigate("/");
+					}
+				});
+				if (flag === 0) {
+					toast.error(`Not a valid country!
+				Available Countries: 
+				${countries.map((country) => " " + country.country_name)}`);
+				}
+			});
 	};
 
 	console.log(watch("img_url"));
@@ -147,7 +196,7 @@ const AddTouristSpot = () => {
 						type="Number"
 						name="travel_time"
 						id="travel_time"
-						placeholder="Ex. Summer, Winter etc."
+						placeholder="Expected Travel Time"
 						required
 						className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
 					/>
