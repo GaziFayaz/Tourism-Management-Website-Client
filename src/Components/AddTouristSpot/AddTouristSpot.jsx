@@ -6,17 +6,20 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-
 const AddTouristSpot = () => {
-  useEffect(() => {
+	useEffect(() => {
 		AOS.init();
 		AOS.refresh();
 	}, []);
 
-	const { user } =
-		useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 
-	const { register, handleSubmit, watch  } = useForm();
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({defaultValues: { user_name: user.displayName, user_email: user.email }});
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -140,10 +143,10 @@ const AddTouristSpot = () => {
 						Travel Time (Days)
 					</p>
 					<input
-						{...register("season", { required: true })}
+						{...register("travel_time", { required: true })}
 						type="Number"
-						name="season"
-						id="season"
+						name="travel_time"
+						id="travel_time"
 						placeholder="Ex. Summer, Winter etc."
 						required
 						className="border-b-2 border-gray-400 w-full p-2 rounded-xl"
@@ -168,7 +171,7 @@ const AddTouristSpot = () => {
 						<p className="text-xl font-semibold text-white mb-2">User Email</p>
 						<input
 							{...register("user_email", { required: true })}
-              value={user.email}
+							value={user.email}
 							type="email"
 							name="user_email"
 							id="user_email"
@@ -181,7 +184,7 @@ const AddTouristSpot = () => {
 						<p className="text-xl font-semibold text-white mb-2">User Name</p>
 						<input
 							{...register("user_name", { required: true })}
-              value={user.displayName}
+							value={user.displayName}
 							type="text"
 							name="user_name"
 							id="user_name"
@@ -191,7 +194,7 @@ const AddTouristSpot = () => {
 						/>
 					</div>
 				</div>
-
+				{errors.user_name && console.log(errors.user_name)}
 				<input
 					type="submit"
 					value={"Add Tourist Spot"}
