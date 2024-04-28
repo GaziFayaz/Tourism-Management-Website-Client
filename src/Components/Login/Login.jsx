@@ -52,14 +52,32 @@ const Login = () => {
 
 	const loginUsingGoogle = () => {
 		signInGoogle()
-			.then(() => {
-				// // This gives you a Google Access Token. You can use it to access the Google API.
-				// const credential = GoogleAuthProvider.credentialFromResult(result);
-				// const token = credential.accessToken;
-				// // The signed-in user info.
-				// const user = result.user;
-				// // IdP data available using getAdditionalUserInfo(result)
-				// // ...
+			.then((userCredential) => {
+				fetch(`http://localhost:5000/user/${userCredential.user.uid}`).then(
+					(res) => {
+						const contentType = res.headers.get("content-type");
+						if (!(contentType && contentType.includes("application/json"))) {
+							const createdAt = userCredential.user?.metadata?.creationTime;
+							const user_email = userCredential.user.email;
+							const firebase_uid = userCredential.user.uid;
+							const tourist_spots = [];
+							const newUser = {
+								user_email,
+								firebase_uid,
+								tourist_spots,
+								createdAt: createdAt,
+							};
+							fetch("http://localhost:5000/user", {
+								method: "POST",
+								headers: {
+									"content-type": "application/json",
+								},
+								body: JSON.stringify(newUser),
+							});
+						}
+					}
+				);
+
 				successToast("Login Successful");
 			})
 			.catch((error) => {
@@ -81,7 +99,31 @@ const Login = () => {
 
 	const loginUsingGithub = () => {
 		signInGithub()
-			.then(() => {
+			.then((userCredential) => {
+				fetch(`http://localhost:5000/user/${userCredential.user.uid}`).then(
+					(res) => {
+						const contentType = res.headers.get("content-type");
+						if (!(contentType && contentType.includes("application/json"))) {
+							const createdAt = userCredential.user?.metadata?.creationTime;
+							const user_email = userCredential.user.email;
+							const firebase_uid = userCredential.user.uid;
+							const tourist_spots = [];
+							const newUser = {
+								user_email,
+								firebase_uid,
+								tourist_spots,
+								createdAt: createdAt,
+							};
+							fetch("http://localhost:5000/user", {
+								method: "POST",
+								headers: {
+									"content-type": "application/json",
+								},
+								body: JSON.stringify(newUser),
+							});
+						}
+					}
+				);
 				successToast("Login Successful");
 			})
 			.catch((error) => {

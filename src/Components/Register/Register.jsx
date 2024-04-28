@@ -52,16 +52,21 @@ const Register = () => {
 				// Signed up
 				console.log(userCredential);
 				const createdAt = userCredential.user?.metadata?.creationTime;
-				const user_email = userCredential.user.email
-				const firebase_uid = userCredential.user.uid
-				const tourist_spots = []
-				const user = { user_email, firebase_uid, tourist_spots, createdAt: createdAt };
+				const user_email = userCredential.user.email;
+				const firebase_uid = userCredential.user.uid;
+				const tourist_spots = [];
+				const newUser = {
+					user_email,
+					firebase_uid,
+					tourist_spots,
+					createdAt: createdAt,
+				};
 				fetch("http://localhost:5000/user", {
 					method: "POST",
 					headers: {
 						"content-type": "application/json",
 					},
-					body: JSON.stringify(user),
+					body: JSON.stringify(newUser),
 				});
 				customizeProfile(data.name, data.photoUrl)
 					.then((userCredential) => {
