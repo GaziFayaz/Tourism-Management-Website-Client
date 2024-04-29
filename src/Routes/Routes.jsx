@@ -9,6 +9,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import TouristSpotDetails from "../Components/TouristSpotDetails/TouristSpotDetails";
 import UserTouristSpots from "../Components/UserTouristSpots/UserTouristSpots";
 import UpdateTouristSpot from "../Components/UpdateTouristSpot/UpdateTouristSpot";
+import ErrorElement from "../Components/Error/ErrorElement";
 
 export const router = createBrowserRouter([
 	{
@@ -66,5 +67,6 @@ export const router = createBrowserRouter([
 				element: <Register></Register>,
 			},
 		],
+    errorElement: <ErrorElement></ErrorElement>
 	},
 ]);
