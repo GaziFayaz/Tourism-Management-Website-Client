@@ -27,7 +27,6 @@ const UpdateTouristSpot = () => {
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { isDirty },
 	} = useForm({
 		defaultValues: touristSpot
@@ -46,7 +45,7 @@ const UpdateTouristSpot = () => {
 		.then(data => {
 			console.log(data)
 			if (data.modifiedCount) {
-				toast.success("Tourist Spot Added Successfully");
+				toast.success("Tourist Spot Updated Successfully");
 			}
 		})
 	};

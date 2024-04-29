@@ -62,11 +62,11 @@ const AddTouristSpot = () => {
 											console.log(data);
 											if (data.modifiedCount) {
 												toast.success("Tourist Spot Added Successfully");
+												navigate("/");
 											}
 										});
 								}
 							});
-						navigate("/");
 					}
 				});
 				if (flag === 0) {

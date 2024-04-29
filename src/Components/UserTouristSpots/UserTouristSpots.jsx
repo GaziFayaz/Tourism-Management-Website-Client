@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UserTouristSpots = () => {
 	const { id } = useParams();
@@ -15,8 +16,40 @@ const UserTouristSpots = () => {
 				setLoading(false);
 			});
 	}, []);
+
+	const handleDelete = (id) => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				fetch(`http://localhost:5000/delete-tourist-spot/${id}`, {
+					method: "DELETE",
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						console.log(data);
+						if (data.deletedCount) {
+							setTouristSpots(
+								touristSpots.filter((touristSpot) => touristSpot._id !== id)
+							);
+							Swal.fire({
+								title: "Deleted!",
+								text: "Your file has been deleted.",
+								icon: "success",
+							});
+						}
+					});
+			}
+		});
+	};
 	// const touristSpots = useLoaderData()
-	console.log(id);
+	// console.log(id);
 	if (loading) {
 		return (
 			<div className="flex justify-center ">
@@ -69,7 +102,12 @@ const UserTouristSpots = () => {
 											</Link>
 										</th>
 										<th>
-											<button className="btn btn-error btn-xs">Delete</button>
+											<button
+												onClick={() => handleDelete(touristSpot._id)}
+												className="btn btn-error btn-xs"
+											>
+												Delete
+											</button>
 										</th>
 									</tr>
 								);
