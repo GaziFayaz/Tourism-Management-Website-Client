@@ -34,7 +34,7 @@ const TouristSpotDetails = () => {
 						<h1 className="text-2xl lg:text-4xl font-bold">
 							{touristSpot.tourist_spot_name}
 						</h1>
-						<p className="text-xl font-semibold mt-2">
+						<p className="text-xl font-medium mt-2">
 							{touristSpot.location}, {touristSpot.country_name}
 						</p>
 
