@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const UpdateTouristSpot = () => {
 	const { id } = useParams();
@@ -34,6 +35,20 @@ const UpdateTouristSpot = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
+		fetch(`http://localhost:5000/update-tourist-spot/${id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => res.json())
+		.then(data => {
+			console.log(data)
+			if (data.modifiedCount) {
+				toast.success("Tourist Spot Added Successfully");
+			}
+		})
 	};
 
 	console.log(id);
