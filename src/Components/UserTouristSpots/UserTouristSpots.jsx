@@ -1,73 +1,83 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link, useParams } from "react-router-dom";
 
 const UserTouristSpots = () => {
+	const { id } = useParams();
+	const [loading, setLoading] = useState(true);
+	const [touristSpots, setTouristSpots] = useState([]);
 	useEffect(() => {
-		AOS.init();
-		AOS.refresh();
+		fetch(`http://localhost:5000/user-tourist-spots/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				setTouristSpots(data);
+				setLoading(false);
+			});
 	}, []);
-	const touristSpots = useLoaderData();
+	// const touristSpots = useLoaderData()
+	console.log(id);
+	if (loading) {
+		return (
+			<div className="flex justify-center ">
+				<span className="loading loading-spinner loading-lg text-accent-pink "></span>
+			</div>
+		);
+	}
 	return (
-		<div className="overflow-x-auto">
-			<table className="table">
-				{/* head */}
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Job</th>
-						<th>Favorite Color</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{touristSpots.map((touristSpot) => {
-						return (
-							<tr key={touristSpot._id}>
-								<td>
-									<div className="flex items-center gap-3">
-										<div className="avatar">
-											<div className="mask mask-squircle w-12 h-12">
-												<img
-													src="/tailwind-css-component-profile-2@56w.png"
-													alt="Avatar Tailwind CSS Component"
-												/>
-											</div>
-										</div>
-										<div>
-											<div className="font-bold">Hart Hagerty</div>
-											<div className="text-sm opacity-50">United States</div>
-										</div>
-									</div>
-								</td>
-								<td>
-									Zemlak, Daniel and Leannon
-									<br />
-									<span className="badge badge-ghost badge-sm">
-										Desktop Support Technician
-									</span>
-								</td>
-								<td>Purple</td>
-								<th>
-									<button className="btn btn-ghost btn-xs">details</button>
-								</th>
+		<div className="flex flex-col items-center text-center w-full">
+			<Helmet>
+				<title>GlobeGuide | My List</title>
+			</Helmet>
+			<h1 className="text-5xl font-bold text-accent-cyan">My List</h1>
+			<div className="w-full mt-14">
+				<div className="overflow-x-auto">
+					<table className="table">
+						{/* head */}
+						<thead>
+							<tr>
+								<th>Tourist Spot Name</th>
+								<th>Country</th>
+								<th>Location</th>
+								<th>Average Cost</th>
+								<th>Travel Time</th>
 							</tr>
-						);
-					})}
-					
-				</tbody>
-				{/* foot */}
-				<tfoot>
-					<tr>
-						<th></th>
-						<th>Name</th>
-						<th>Job</th>
-						<th>Favorite Color</th>
-						<th></th>
-					</tr>
-				</tfoot>
-			</table>
+						</thead>
+						<tbody>
+							{touristSpots.map((touristSpot) => {
+								return (
+									<tr key={touristSpot._id}>
+										<td>
+											<div>
+												<div className="font-bold">
+													{touristSpot.tourist_spot_name}
+												</div>
+											</div>
+										</td>
+										<td>{touristSpot.country_name}</td>
+										<td>{touristSpot.location}</td>
+										<td>
+											<span className="font-bold">$</span>
+											{touristSpot.avg_cost}
+										</td>
+										<td>{touristSpot.travel_time} days</td>
+										<th>
+											<Link to={`../update-tourist-spot/${touristSpot._id}`}>
+												<button className="btn bg-green-500 btn-xs">
+													Update
+												</button>
+											</Link>
+										</th>
+										<th>
+											<button className="btn btn-error btn-xs">Delete</button>
+										</th>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	);
 };

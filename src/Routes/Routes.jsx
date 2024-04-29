@@ -8,6 +8,7 @@ import Register from "../Components/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import TouristSpotDetails from "../Components/TouristSpotDetails/TouristSpotDetails";
 import UserTouristSpots from "../Components/UserTouristSpots/UserTouristSpots";
+import UpdateTouristSpot from "../Components/UpdateTouristSpot/UpdateTouristSpot";
 
 export const router = createBrowserRouter([
 	{
@@ -48,7 +49,14 @@ export const router = createBrowserRouter([
 						<UserTouristSpots></UserTouristSpots>
 					</PrivateRoutes>
 				),
-        loader: ({params}) => fetch(`http://localhost:5000/user-tourist-spots/${params.id}`)
+			},
+			{
+				path: "/update-tourist-spot/:id",
+				element: (
+					<PrivateRoutes>
+						<UpdateTouristSpot></UpdateTouristSpot>
+					</PrivateRoutes>
+				),
 			},
 			{
 				path: "/login",
