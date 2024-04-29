@@ -51,7 +51,7 @@ const TouristSpotDetails = () => {
 					<div className="flex items-center gap-2 mt-4">
 						<MdOutlineModeOfTravel className="text-2xl" />
 						<p className="font-bold text-xl">
-							Expected Travel Time: {touristSpot.travel_time}
+							Expected Travel Time: {touristSpot.travel_time} days
 						</p>
 					</div>
 					<div className="mt-5 flex flex-col gap-2">

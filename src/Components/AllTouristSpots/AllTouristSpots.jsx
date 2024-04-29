@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -8,7 +8,23 @@ const AllTouristSpots = () => {
 		AOS.init();
 		AOS.refresh();
 	}, []);
-	const touristSpots = useLoaderData();
+  useEffect(() => {
+    fetch("http://localhost:5000/tourist-spots")
+    .then(res => res.json())
+    .then(data => {
+      setTouristSpots(data)
+      setLoading(false)
+    })
+  },[])
+  const [loading, setLoading] = useState(true)
+	const [touristSpots, setTouristSpots] = useState();
+  if (loading) {
+		return (
+			<div className="flex justify-center ">
+				<span className="loading loading-spinner loading-lg text-accent-pink "></span>
+			</div>
+		);
+	}
 	return (
 		<div className="flex flex-col items-center text-center w-full">
 			<h1 className="text-7xl font-bold text-accent-cyan">Tourist Spots</h1>
@@ -44,7 +60,7 @@ const AllTouristSpots = () => {
 								</div>
 								<div className="card-actions justify-end">
 									<Link to={`../tourist-spot/${touristSpot._id}`}>
-										<button className="btn bg-[#5356FF] text-white">
+										<button className="btn bg-accent-pink text-white">
 											See Details
 										</button>
 									</Link>

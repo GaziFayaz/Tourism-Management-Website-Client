@@ -6,7 +6,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 const Navbar = () => {
 	const { user, loading, logout } = useContext(AuthContext);
 	console.log("user", user);
-	const activeLinkAttr = "bg-accent-dark-blue text-bg-light";
+	const activeLinkAttr = "bg-accent-pink text-bg-light";
 
 	if (loading) {
 		return <div className="navbar"></div>;
