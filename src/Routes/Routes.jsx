@@ -48,7 +48,15 @@ export const router = createBrowserRouter([
 					<PrivateRoutes>
 						<UserTouristSpots></UserTouristSpots>
 					</PrivateRoutes>
-				)
+				),
+			},
+			{
+				path: "/update-tourist-spot/:id",
+				element: (
+					<PrivateRoutes>
+						<UpdateTouristSpot></UpdateTouristSpot>
+					</PrivateRoutes>
+				),
 			},
 			{
 				path: "/login",
