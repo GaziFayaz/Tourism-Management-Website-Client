@@ -40,7 +40,7 @@ const Navbar = () => {
 			</li>
 			<li className="h-full">
 				<NavLink
-					to="/my-list"
+					to={`/user-tourist-spots/${user?.uid}`}
 					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
 				>
 					My List
