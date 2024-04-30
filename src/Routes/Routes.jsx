@@ -10,6 +10,7 @@ import TouristSpotDetails from "../Components/TouristSpotDetails/TouristSpotDeta
 import UserTouristSpots from "../Components/UserTouristSpots/UserTouristSpots";
 import UpdateTouristSpot from "../Components/UpdateTouristSpot/UpdateTouristSpot";
 import ErrorElement from "../Components/Error/ErrorElement";
+import CountryTouristSpots from "../Components/CountryTouristSpots/CountryTouristSpots";
 
 export const router = createBrowserRouter([
 	{
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
+				path: "/country/:country_name",
+				element: <CountryTouristSpots></CountryTouristSpots>,
+			},
+			{
 				path: "/update-tourist-spot/:id",
 				element: (
 					<PrivateRoutes>
@@ -67,6 +72,6 @@ export const router = createBrowserRouter([
 				element: <Register></Register>,
 			},
 		],
-    errorElement: <ErrorElement></ErrorElement>
+		errorElement: <ErrorElement></ErrorElement>,
 	},
 ]);
