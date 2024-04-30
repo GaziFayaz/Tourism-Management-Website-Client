@@ -53,32 +53,31 @@ const Login = () => {
 	const loginUsingGoogle = () => {
 		signInGoogle()
 			.then((userCredential) => {
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`).then(
-					(res) => {
-						const contentType = res.headers.get("content-type");
-						if (!(contentType && contentType.includes("application/json"))) {
-							const createdAt = userCredential.user?.metadata?.creationTime;
-							const user_email = userCredential.user.email;
-							const firebase_uid = userCredential.user.uid;
-							const tourist_spots = [];
-							const newUser = {
-								user_email,
-								firebase_uid,
-								tourist_spots,
-								createdAt: createdAt,
-							};
-							fetch("http://localhost:5000/user", {
-								method: "POST",
-								headers: {
-									"content-type": "application/json",
-								},
-								body: JSON.stringify(newUser),
-							});
-						}
-					}
-				);
-
 				successToast("Login Successful");
+				// console.log(userCredential.user.uid);
+				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
+					.then((res) => res.json())
+					.catch(() => {
+						// console.log(data)
+						console.log("new user");
+						const createdAt = userCredential.user?.metadata?.creationTime;
+						const user_email = userCredential.user.email;
+						const firebase_uid = userCredential.user.uid;
+						const tourist_spots = [];
+						const newUser = {
+							user_email,
+							firebase_uid,
+							tourist_spots,
+							createdAt: createdAt,
+						};
+						fetch("http://localhost:5000/user", {
+							method: "POST",
+							headers: {
+								"content-type": "application/json",
+							},
+							body: JSON.stringify(newUser),
+						});
+					});
 			})
 			.catch((error) => {
 				// // Handle Errors here.
@@ -100,31 +99,31 @@ const Login = () => {
 	const loginUsingGithub = () => {
 		signInGithub()
 			.then((userCredential) => {
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`).then(
-					(res) => {
-						const contentType = res.headers.get("content-type");
-						if (!(contentType && contentType.includes("application/json"))) {
-							const createdAt = userCredential.user?.metadata?.creationTime;
-							const user_email = userCredential.user.email;
-							const firebase_uid = userCredential.user.uid;
-							const tourist_spots = [];
-							const newUser = {
-								user_email,
-								firebase_uid,
-								tourist_spots,
-								createdAt: createdAt,
-							};
-							fetch("http://localhost:5000/user", {
-								method: "POST",
-								headers: {
-									"content-type": "application/json",
-								},
-								body: JSON.stringify(newUser),
-							});
-						}
-					}
-				);
 				successToast("Login Successful");
+				// console.log(userCredential.user.uid);
+				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
+					.then((res) => res.json())
+					.catch(() => {
+						// console.log(data)
+						console.log("new user");
+						const createdAt = userCredential.user?.metadata?.creationTime;
+						const user_email = userCredential.user.email;
+						const firebase_uid = userCredential.user.uid;
+						const tourist_spots = [];
+						const newUser = {
+							user_email,
+							firebase_uid,
+							tourist_spots,
+							createdAt: createdAt,
+						};
+						fetch("http://localhost:5000/user", {
+							method: "POST",
+							headers: {
+								"content-type": "application/json",
+							},
+							body: JSON.stringify(newUser),
+						});
+					});
 			})
 			.catch((error) => {
 				console.log(error);
