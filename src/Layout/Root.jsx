@@ -5,9 +5,10 @@ import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../Providers/ThemeProvider";
+import { Slide } from "react-awesome-reveal";
 
 const Root = () => {
-	const { theme,setTheme } = useContext(ThemeContext)
+	const { theme, setTheme } = useContext(ThemeContext);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		console.log("initial theme", theme);
@@ -32,18 +33,18 @@ const Root = () => {
 	return (
 		<div
 			className={`font-poppins min-h-screen flex flex-col justify-between 
-			${
-				theme === "light" ? "bg-bg-light" : "bg-gray-800"
-			}
+			${theme === "light" ? "bg-bg-light" : "bg-gray-800"}
 			`}
 		>
-			<Navbar theme={[theme, setTheme]}></Navbar>
-			<div className="mx-6 md:mx-12 lg:mx-32">
-				<Outlet></Outlet>
-				<ToastContainer />
-			</div>
+			<Slide>
+				<Navbar theme={[theme, setTheme]}></Navbar>
+				<div className="mx-6 md:mx-12 lg:mx-32">
+					<Outlet></Outlet>
+					<ToastContainer />
+				</div>
 
-			<Footer></Footer>
+				<Footer></Footer>
+			</Slide>
 		</div>
 	);
 };

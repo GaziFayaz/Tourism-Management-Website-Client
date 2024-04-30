@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ThemeContext } from "../../Providers/ThemeProvider";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
@@ -50,7 +51,7 @@ const Navbar = () => {
 				<NavLink
 					to="/add-tourist-spot"
 					className={`${({ isActive }) =>
-					isActive ? activeLinkAttr : ""} focus:text-white`}
+						isActive ? activeLinkAttr : ""} focus:text-white`}
 				>
 					Add Tourist Spot
 				</NavLink>
@@ -69,6 +70,7 @@ const Navbar = () => {
 
 	return (
 		<div className="navbar mb-6 lg:mb-20">
+			<Tooltip id="my-tooltip" />
 			<div className="navbar-start w-auto">
 				<div className="dropdown">
 					<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
@@ -98,7 +100,12 @@ const Navbar = () => {
 								<li>
 									<button onClick={() => logout()}>Logout</button>
 								</li>
-								<li className="h-full mt-1" title={user.displayName}>
+								<li
+									className="h-full mt-1"
+									data-tooltip-id="my-tooltip"
+									data-tooltip-content={user.displayName}
+									data-tooltip-place="top"
+								>
 									<div className="h-full">
 										{user.photoURL ? (
 											<img
@@ -173,7 +180,10 @@ const Navbar = () => {
 							>
 								Logout
 							</Link>
-							<li className="ml-4 h-full" title={user.displayName}>
+							<li className="ml-4 h-full" 
+									data-tooltip-id="my-tooltip"
+									data-tooltip-content={user.displayName}
+									data-tooltip-place="top">
 								<div className="h-full p-0">
 									<img
 										src={user.photoURL}
