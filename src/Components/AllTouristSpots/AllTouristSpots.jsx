@@ -10,7 +10,7 @@ const AllTouristSpots = () => {
 		AOS.refresh();
 	}, []);
 	useEffect(() => {
-		fetch("http://localhost:5000/tourist-spots")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spots")
 			.then((res) => res.json())
 			.then((data) => {
 				setTouristSpots(data);
@@ -22,7 +22,7 @@ const AllTouristSpots = () => {
 
 	const handleSort = () => {
 		setLoading(true);
-		fetch("http://localhost:5000/tourist-spots/sort-by-cost")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spots/sort-by-cost")
 			.then((res) => res.json())
 			.then((data) => {
 				setTouristSpots(data);

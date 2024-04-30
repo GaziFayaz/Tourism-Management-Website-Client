@@ -61,7 +61,7 @@ const Register = () => {
 					tourist_spots,
 					createdAt: createdAt,
 				};
-				fetch("http://localhost:5000/user", {
+				fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/user", {
 					method: "POST",
 					headers: {
 						"content-type": "application/json",

@@ -11,7 +11,7 @@ const CountryTouristSpots = () => {
 		AOS.refresh();
 	}, []);
 	useEffect(() => {
-		fetch(`http://localhost:5000/country-tourist-spots/${country_name}`)
+		fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/country-tourist-spots/${country_name}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setTouristSpots(data);

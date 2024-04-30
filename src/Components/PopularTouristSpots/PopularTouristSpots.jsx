@@ -9,7 +9,7 @@ const PopularTouristSpots = () => {
 		AOS.refresh();
 	}, []);
 	useEffect(() => {
-		fetch("http://localhost:5000/tourist-spots/sort-by-visitors/6")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spots/sort-by-visitors/6")
 			.then((res) => res.json())
 			.then((data) => {
         console.log(data)

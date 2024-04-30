@@ -4,15 +4,15 @@ import { ThemeContext } from "../../Providers/ThemeProvider";
 const Stats = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
 	useEffect(() => {
-		fetch("http://localhost:5000/tourist-spots-count")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spots-count")
 			.then((res) => res.json())
 			.then((data) => setTouristSpotCount(data.length));
 
-		fetch("http://localhost:5000/countries-count")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/countries-count")
 			.then((res) => res.json())
 			.then((data) => setCountryCount(data.length));
 
-		fetch("http://localhost:5000/users-count")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/users-count")
 			.then((res) => res.json())
 			.then((data) => setUserCount(data.length));
 	}, []);

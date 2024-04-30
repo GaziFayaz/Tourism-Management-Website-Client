@@ -55,7 +55,7 @@ const Login = () => {
 			.then((userCredential) => {
 				successToast("Login Successful");
 				// console.log(userCredential.user.uid);
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
+				fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/user/${userCredential.user.uid}`)
 					.then((res) => res.json())
 					.catch(() => {
 						// console.log(data)
@@ -70,7 +70,7 @@ const Login = () => {
 							tourist_spots,
 							createdAt: createdAt,
 						};
-						fetch("http://localhost:5000/user", {
+						fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/user", {
 							method: "POST",
 							headers: {
 								"content-type": "application/json",
@@ -101,7 +101,7 @@ const Login = () => {
 			.then((userCredential) => {
 				successToast("Login Successful");
 				// console.log(userCredential.user.uid);
-				fetch(`http://localhost:5000/user/${userCredential.user.uid}`)
+				fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/user/${userCredential.user.uid}`)
 					.then((res) => res.json())
 					.catch(() => {
 						// console.log(data)
@@ -116,7 +116,7 @@ const Login = () => {
 							tourist_spots,
 							createdAt: createdAt,
 						};
-						fetch("http://localhost:5000/user", {
+						fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/user", {
 							method: "POST",
 							headers: {
 								"content-type": "application/json",

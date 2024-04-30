@@ -9,7 +9,7 @@ const HomeTouristSpots = () => {
 		AOS.refresh();
 	}, []);
 	useEffect(() => {
-		fetch("http://localhost:5000/tourist-spots/6")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spots/6")
 			.then((res) => res.json())
 			.then((data) => {
 				setTouristSpots(data);

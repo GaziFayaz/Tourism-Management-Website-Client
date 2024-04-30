@@ -8,7 +8,7 @@ const UserTouristSpots = () => {
 	const [loading, setLoading] = useState(true);
 	const [touristSpots, setTouristSpots] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:5000/user-tourist-spots/${id}`)
+		fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/user-tourist-spots/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
@@ -28,7 +28,7 @@ const UserTouristSpots = () => {
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				fetch(`http://localhost:5000/delete-tourist-spot/${id}`, {
+				fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/delete-tourist-spot/${id}`, {
 					method: "DELETE",
 				})
 					.then((res) => res.json())

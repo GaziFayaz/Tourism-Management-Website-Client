@@ -31,7 +31,7 @@ const AddTouristSpot = () => {
 		data.visitors = parseInt(data.visitors);
 		let flag = 0;
 		console.log(data);
-		fetch("http://localhost:5000/countries")
+		fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/countries")
 			.then((res) => res.json())
 			.then((countries) => {
 				console.log(countries);
@@ -39,7 +39,7 @@ const AddTouristSpot = () => {
 					console.log(country.country_name, data.country_name);
 					if (country.country_name === data.country_name) {
 						flag = 1;
-						fetch("http://localhost:5000/tourist-spot", {
+						fetch("https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spot", {
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json",
@@ -50,7 +50,7 @@ const AddTouristSpot = () => {
 							.then((data) => {
 								console.log(data);
 								if (data.insertedId) {
-									fetch(`http://localhost:5000/update-user/${user.uid}`, {
+									fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/update-user/${user.uid}`, {
 										method: "POST",
 										headers: {
 											"Content-Type": "application/json",

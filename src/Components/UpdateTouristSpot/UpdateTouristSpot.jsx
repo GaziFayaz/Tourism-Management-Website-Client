@@ -15,7 +15,7 @@ const UpdateTouristSpot = () => {
 		AOS.refresh();
 	}, []);
 	useEffect(() => {
-		fetch(`http://localhost:5000/tourist-spot/${id}`)
+		fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/tourist-spot/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
@@ -34,7 +34,7 @@ const UpdateTouristSpot = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-		fetch(`http://localhost:5000/update-tourist-spot/${id}`, {
+		fetch(`https://b9a10-server-side-gazi-fayaz.vercel.app/update-tourist-spot/${id}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
