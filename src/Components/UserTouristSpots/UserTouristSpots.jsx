@@ -63,7 +63,7 @@ const UserTouristSpots = () => {
 				<title>GlobeGuide | My List</title>
 			</Helmet>
 			<h1 className="text-5xl font-bold text-accent-cyan">My List</h1>
-			<div className="w-full mt-14">
+			<div className="w-full mt-14  bg-slate-300 rounded-3xl px-5 py-10">
 				<div className="overflow-x-auto">
 					<table className="table">
 						{/* head */}
