@@ -36,15 +36,15 @@ const Root = () => {
 			${theme === "light" ? "bg-bg-light" : "bg-gray-800"}
 			`}
 		>
+			<Navbar theme={[theme, setTheme]}></Navbar>
 			<Slide>
-				<Navbar theme={[theme, setTheme]}></Navbar>
 				<div className="mx-6 md:mx-12 lg:mx-32">
 					<Outlet></Outlet>
 					<ToastContainer />
 				</div>
-
-				<Footer></Footer>
 			</Slide>
+
+			<Footer></Footer>
 		</div>
 	);
 };
