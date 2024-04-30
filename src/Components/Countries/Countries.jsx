@@ -25,7 +25,7 @@ const Countries = () => {
 			</p>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-14">
 				{countries.map((country) => {
-					console.log(country);
+					// console.log(country);
 					return (
 						<Link to={`/country/${country.country_name}`} key={country._id}>
 							<div

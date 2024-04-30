@@ -37,7 +37,7 @@ const HomeTouristSpots = () => {
 			
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-14">
 				{touristSpots.map((touristSpot) => {
-					console.log(touristSpot);
+					// console.log(touristSpot);
 					return (
 						<div
 							key={touristSpot._id}
