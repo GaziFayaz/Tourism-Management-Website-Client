@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../Providers/ThemeProvider";
 
 const Stats = () => {
+	const { theme, setTheme } = useContext(ThemeContext);
 	useEffect(() => {
 		fetch("http://localhost:5000/tourist-spots-count")
 			.then((res) => res.json())
@@ -19,20 +21,20 @@ const Stats = () => {
 	const [countryCount, setCountryCount] = useState(0);
   const [userCount, setUserCount] = useState(0);
 	return (
-		<div className="stats stats-vertical lg:stats-horizontal shadow w-full">
+		<div className={`stats stats-vertical lg:stats-horizontal shadow ${theme === "light" ? "bg-white" : "bg-accent-dark-blue"} w-full`}>
 			<div className="stat place-items-center">
 				<div className="stat-title text-lg font-semibold text-accent-pink">Total Tourist Spots</div>
-				<div className="stat-value text-6xl">{touristSpotCount}</div>
+				<div className={`stat-value ${theme === "light" ? "" : "text-white"}  text-6xl`}>{touristSpotCount}</div>
 			</div>
 
 			<div className="stat place-items-center">
 				<div className="stat-title text-lg font-semibold text-accent-pink">Total Countries</div>
-				<div className="stat-value text-6xl">{countryCount}</div>
+				<div className={`stat-value ${theme === "light" ? "" : "text-white"}  text-6xl`}>{countryCount}</div>
 			</div>
 
 			<div className="stat place-items-center">
 				<div className="stat-title text-lg font-semibold text-accent-pink">Active Users</div>
-				<div className="stat-value text-6xl">{userCount}</div>
+				<div className={`stat-value ${theme === "light" ? "" : "text-white"}  text-6xl`}>{userCount}</div>
 			</div>
 		</div>
 	);

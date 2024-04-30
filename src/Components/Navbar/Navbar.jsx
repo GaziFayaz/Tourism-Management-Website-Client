@@ -2,11 +2,25 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { ThemeContext } from "../../Providers/ThemeProvider";
 
 const Navbar = () => {
+	const { theme, setTheme } = useContext(ThemeContext);
 	const { user, loading, logout } = useContext(AuthContext);
 	console.log("user", user);
-	const activeLinkAttr = "bg-accent-pink text-bg-light";
+	const activeLinkAttr = `bg-accent-pink ${
+		theme === " text-bg-light" ? "" : "bg"
+	} `;
+
+	const handleTheme = () => {
+		if (theme === "light") {
+			setTheme("dark");
+			localStorage.setItem("theme", "dark");
+		} else {
+			setTheme("light");
+			localStorage.setItem("theme", "light");
+		}
+	};
 
 	if (loading) {
 		return <div className="navbar"></div>;
@@ -17,7 +31,8 @@ const Navbar = () => {
 			<li className="h-full">
 				<NavLink
 					to="/"
-					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+					className={`${({ isActive }) =>
+						isActive ? activeLinkAttr : ""} focus:text-white`}
 				>
 					Home
 				</NavLink>
@@ -25,7 +40,8 @@ const Navbar = () => {
 			<li className="h-full">
 				<NavLink
 					to="/all-tourist-spots"
-					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+					className={`${({ isActive }) =>
+						isActive ? activeLinkAttr : ""} focus:text-white`}
 				>
 					All Tourists Spots
 				</NavLink>
@@ -33,7 +49,8 @@ const Navbar = () => {
 			<li className="h-full">
 				<NavLink
 					to="/add-tourist-spot"
-					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+					className={`${({ isActive }) =>
+					isActive ? activeLinkAttr : ""} focus:text-white`}
 				>
 					Add Tourist Spot
 				</NavLink>
@@ -41,7 +58,8 @@ const Navbar = () => {
 			<li className="h-full">
 				<NavLink
 					to={`/user-tourist-spots/${user?.uid}`}
-					className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+					className={`${({ isActive }) =>
+						isActive ? activeLinkAttr : ""} focus:text-white`}
 				>
 					My List
 				</NavLink>
@@ -51,15 +69,15 @@ const Navbar = () => {
 
 	return (
 		<div className="navbar mb-6 lg:mb-20">
-			<div className="navbar-start">
+			<div className="navbar-start w-auto">
 				<div className="dropdown">
-					<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+					<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-5 w-5"
-							fill="none"
+							fill=""
 							viewBox="0 0 24 24"
-							stroke="currentColor"
+							stroke={`${theme === "light" ? "currentColor" : "white"}`}
 						>
 							<path
 								strokeLinecap="round"
@@ -99,9 +117,8 @@ const Navbar = () => {
 								<li className="h-full">
 									<NavLink
 										to="/login"
-										className={({ isActive }) =>
-											isActive ? activeLinkAttr : ""
-										}
+										className={`${({ isActive }) =>
+											isActive ? activeLinkAttr : ""} focus:text-white`}
 									>
 										Login
 									</NavLink>
@@ -109,32 +126,49 @@ const Navbar = () => {
 								<li className="h-full">
 									<NavLink
 										to="/register"
-										className={({ isActive }) =>
-											isActive ? activeLinkAttr : ""
-										}
+										className={`${({ isActive }) =>
+											isActive ? activeLinkAttr : ""} focus:text-white`}
 									>
 										Register
 									</NavLink>
 								</li>
 							</>
 						)}
+						<li className="ml-5">
+							<input
+								onClick={handleTheme}
+								type="checkbox"
+								className="toggle"
+								checked={theme === "light" ? false : true}
+							/>
+						</li>
 					</ul>
 				</div>
 				<Link
 					to={"/"}
-					className="btn btn-ghost text-4xl text-accent-dark-blue font-extrabold"
+					className={`btn btn-ghost text-4xl ${
+						theme === "light" ? "text-accent-dark-blue" : "text-accent-pink"
+					} font-extrabold`}
 				>
 					GlobeGuide
 				</Link>
 			</div>
-			<div className="navbar-center hidden lg:flex">
-				<ul className="menu menu-horizontal px-1 text-xl font-bold text-accent-dark-blue h-full items-center">
+			<div className="navbar-end w-full hidden lg:flex">
+				<ul
+					className={`menu menu-horizontal px-1 text-xl font-bold ${
+						theme === "light" ? "text-accent-dark-blue" : "text-accent-pink"
+					} h-full items-center`}
+				>
 					{routeItems}
 					{user ? (
 						<>
 							<Link
 								to={"/"}
-								className="underline text-accent-dark-blue  text-xl font-bold px-4 py-2"
+								className={`underline ${
+									theme === "light"
+										? "text-accent-dark-blue"
+										: "text-accent-pink"
+								}  text-xl font-bold px-4 py-2`}
 								onClick={() => logout()}
 							>
 								Logout
@@ -154,7 +188,8 @@ const Navbar = () => {
 							<li className="h-full">
 								<NavLink
 									to="/login"
-									className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+									className={`${({ isActive }) =>
+										isActive ? activeLinkAttr : ""} focus:text-white`}
 								>
 									Login
 								</NavLink>
@@ -162,13 +197,22 @@ const Navbar = () => {
 							<li className="h-full">
 								<NavLink
 									to="/register"
-									className={({ isActive }) => (isActive ? activeLinkAttr : "")}
+									className={`${({ isActive }) =>
+										isActive ? activeLinkAttr : ""} focus:text-white`}
 								>
 									Register
 								</NavLink>
 							</li>
 						</>
 					)}
+					<li className="ml-5">
+						<input
+							onClick={handleTheme}
+							type="checkbox"
+							className="toggle"
+							checked={theme === "light" ? false : true}
+						/>
+					</li>
 				</ul>
 			</div>
 		</div>
